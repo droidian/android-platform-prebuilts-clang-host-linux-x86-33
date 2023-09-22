@@ -1,0 +1,27 @@
+#!/usr/bin/make -f
+
+CLANG_VERSION := 14.0
+CLANG_REVISION := r450784d
+ANDROID_API_VERSION := 33
+
+%:
+	dh $@
+
+debian/control: debian/control.in
+	sed -e "s|@CLANG_VERSION@|$(CLANG_VERSION)|g" \
+		-e "s|@CLANG_REVISION@|$(CLANG_REVISION)|g" \
+		-e "s|@ANDROID_API_VERSION@|$(ANDROID_API_VERSION)|g" \
+		debian/control.in > debian/control
+
+override_dh_auto_install:
+	# clang
+	mkdir -p $(CURDIR)/debian/clang-android-$(CLANG_VERSION)-$(CLANG_REVISION)/usr/lib/llvm-android-$(CLANG_VERSION)-$(CLANG_REVISION)
+
+	cp -R $(CURDIR)/clang-$(CLANG_REVISION)/* $(CURDIR)/debian/clang-android-$(CLANG_VERSION)-$(CLANG_REVISION)/usr/lib/llvm-android-$(CLANG_VERSION)-$(CLANG_REVISION)
+
+	find $(CURDIR)/debian/clang-android-$(CLANG_VERSION)-$(CLANG_REVISION)/usr/lib/llvm-android-$(CLANG_VERSION)-$(CLANG_REVISION) -type f -exec sed -i 's|libtinfo.so.5|libtinfo.so.6|g' {} \;
+
+override_dh_strip:
+
+# FIXME
+override_dh_shlibdeps:

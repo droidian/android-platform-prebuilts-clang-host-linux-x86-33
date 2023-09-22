@@ -1,0 +1,21 @@
+Source: android-platform-prebuilts-clang-host-linux-x86-@ANDROID_API_VERSION@
+Section: devel
+Priority: optional
+Maintainer: Eugenio Paolantonio (g7) <me@medesimo.eu>
+Build-Depends: debhelper (>= 13)
+Standards-Version: 4.5.0.3
+Vcs-Browser: https://github.com/droidian/android-platform-prebuilts-clang-host-linux-x86-@ANDROID_API_VERSION@
+Vcs-Git: https://github.com/droidian/android-platform-prebuilts-clang-host-linux-x86-@ANDROID_API_VERSION@.git
+
+Package: clang-android-@CLANG_VERSION@-@CLANG_REVISION@
+Architecture: amd64
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+         libtinfo5,
+Description: C, C++ and Objective-C compiler - Android prebuilt
+ Clang project is a C, C++, Objective C and Objective C++ front-end based
+ on the LLVM compiler.
+ Its goal is to offer a replacement to the GNU Compiler Collection (GCC).
+ .
+ This package contains clang @CLANG_VERSION@ revision @CLANG_REVISION@, as
+ taken from the Android source tree.
