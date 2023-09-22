@@ -19,6 +19,13 @@ override_dh_auto_install:
 
 	cp -R $(CURDIR)/clang-$(CLANG_REVISION)/* $(CURDIR)/debian/clang-android-$(CLANG_VERSION)-$(CLANG_REVISION)/usr/lib/llvm-android-$(CLANG_VERSION)-$(CLANG_REVISION)
 
+	# Merge split files
+	for file in $$(find $(CURDIR)/debian/clang-android-$(CLANG_VERSION)-$(CLANG_REVISION)/usr/lib/llvm-android-$(CLANG_VERSION)-$(CLANG_REVISION) -type f -iname \*.split\* | sort); do \
+		echo $${file} ; \
+		cat $${file} >> $$(echo $${file} | sed -e 's|\.split.*||g') ; \
+		rm -f $${file} ; \
+	done
+
 	find $(CURDIR)/debian/clang-android-$(CLANG_VERSION)-$(CLANG_REVISION)/usr/lib/llvm-android-$(CLANG_VERSION)-$(CLANG_REVISION) -type f -exec sed -i 's|libtinfo.so.5|libtinfo.so.6|g' {} \;
 
 override_dh_strip:
