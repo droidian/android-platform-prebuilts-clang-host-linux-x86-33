@@ -32,3 +32,5 @@ override_dh_strip:
 
 # FIXME
 override_dh_shlibdeps:
+
+override_dh_dwz:
