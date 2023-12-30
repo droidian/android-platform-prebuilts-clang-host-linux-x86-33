@@ -11,7 +11,7 @@ Package: clang-android-14.0-r450784d
 Architecture: amd64
 Depends: ${misc:Depends},
          ${shlibs:Depends},
-         libtinfo5,
+         libtinfo6,
 Description: C, C++ and Objective-C compiler - Android prebuilt
  Clang project is a C, C++, Objective C and Objective C++ front-end based
  on the LLVM compiler.
