@@ -26,6 +26,9 @@ override_dh_auto_install:
 		rm -f $${file} ; \
 	done
 
+	# Add executable bit for clang-14 (recomposed split file)
+	chmod +x $(CURDIR)/debian/clang-android-$(CLANG_VERSION)-$(CLANG_REVISION)/usr/lib/llvm-android-$(CLANG_VERSION)-$(CLANG_REVISION)/bin/clang-14
+
 	find $(CURDIR)/debian/clang-android-$(CLANG_VERSION)-$(CLANG_REVISION)/usr/lib/llvm-android-$(CLANG_VERSION)-$(CLANG_REVISION) -type f -exec sed -i 's|libtinfo.so.5|libtinfo.so.6|g' {} \;
 
 override_dh_strip:
